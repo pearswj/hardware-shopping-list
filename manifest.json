@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Canadian Tire → Notion",
+  "name": "Hardware Shopping List → Notion",
   "version": "1.0.0",
-  "description": "Save Canadian Tire products to your Notion database",
+  "description": "Save Canadian Tire and Home Depot products to your Notion database",
   "permissions": [
     "activeTab",
     "storage",
@@ -15,7 +15,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.canadiantire.ca/*"],
+      "matches": ["*://*.canadiantire.ca/*", "*://*.homedepot.ca/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }

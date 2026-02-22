@@ -13,10 +13,10 @@ document.getElementById("settings-link").addEventListener("click", () => {
 async function init() {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
 
-  const isCanadianTire =
-    tab.url && tab.url.includes("canadiantire.ca");
+  const isSupportedSite =
+    tab.url && (tab.url.includes("canadiantire.ca") || tab.url.includes("homedepot.ca"));
 
-  if (!isCanadianTire) {
+  if (!isSupportedSite) {
     formEl.style.display = "none";
     notOnPageEl.style.display = "block";
     return;
@@ -36,6 +36,9 @@ async function init() {
   urlInput.value = info.url;
   if (info.location) locationInput.value = info.location;
   locationInput.focus();
+
+  // Stash store name for use when saving
+  saveBtn.dataset.store = info.store || "";
 }
 
 saveBtn.addEventListener("click", async () => {
@@ -63,7 +66,7 @@ saveBtn.addEventListener("click", async () => {
   try {
     await browser.runtime.sendMessage({
       type: "SAVE_TO_NOTION",
-      payload: { name, url, location, token: notionToken, databaseId: notionDatabaseId },
+      payload: { name, url, location, store: saveBtn.dataset.store, token: notionToken, databaseId: notionDatabaseId },
     });
     setStatus("Saved!", "success");
   } catch (err) {

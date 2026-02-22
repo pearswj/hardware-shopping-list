@@ -6,7 +6,7 @@ browser.runtime.onMessage.addListener((message) => {
   }
 });
 
-async function saveToNotion({ name, url, location, token, databaseId }) {
+async function saveToNotion({ name, url, location, store, token, databaseId }) {
   const response = await fetch("https://api.notion.com/v1/pages", {
     method: "POST",
     headers: {
@@ -31,7 +31,7 @@ async function saveToNotion({ name, url, location, token, databaseId }) {
         },
         // "Store" is a Select property
         Store: {
-          select: { name: "Canadian Tire" },
+          select: { name: store },
         },
       },
     }),
