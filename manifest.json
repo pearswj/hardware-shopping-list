@@ -3,6 +3,11 @@
   "name": "Hardware Shopping List → Notion",
   "version": "1.0.0",
   "description": "Save Canadian Tire and Home Depot products to your Notion database",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hardware-shopping-list@pearswj"
+    }
+  },
   "permissions": [
     "activeTab",
     "storage",
